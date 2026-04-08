@@ -119,14 +119,14 @@ class CaseFixture:
     case_id: str
     difficulty: str                      # easy, medium, hard
     documents: Dict[str, str]            # doc_name -> content string
-    critical_fields: List[str]           # fields that must be extracted
-    required_checks: List[str]           # strings that must be in state.checks_completed
-    required_issues: List[str]           # strings that must be in state.identified_issues
-    ground_truth_disposition: str        # correct final action_type
-    required_evidence_fields: List[str]  # fields that must appear in extracted_facts
-    has_critical_issues: bool            # True for medium/hard cases
-    soft_step_threshold: int
-    max_steps: int
+    critical_fields: List[str] = field(default_factory=list)
+    required_checks: List[str] = field(default_factory=list)
+    required_issues: List[str] = field(default_factory=list)
+    ground_truth_disposition: str = ""
+    required_evidence_fields: List[str] = field(default_factory=list)
+    has_critical_issues: bool = False
+    soft_step_threshold: int = 15
+    max_steps: int = 20
 
     # Optional vendor response template for request_vendor_info action
     vendor_response: str = ""

@@ -72,7 +72,7 @@ class Grader:
             return self.MIN_SCORE
 
         if state.decision == fixture.ground_truth_disposition:
-            return self.MAX_SCORE
+            return 0.90
 
         # Partial credit for "safe but not perfect" handling
         safe_non_approval_actions = {"hold_invoice", "reject_invoice", "escalate_case"}
@@ -96,7 +96,16 @@ class Grader:
             1 for check in required if state.checks_completed.get(check, False)
         )
         ratio = completed / len(required)
-        return self._scaled_ratio(ratio)
+        score = self._scaled_ratio(ratio)
+        
+        # Hard task strict requirements
+        if fixture.difficulty == "hard":
+            if not state.checks_completed.get("opened_invoice_history", False):
+                score -= 0.15
+            if not state.checks_completed.get("opened_ap_policy", False):
+                score -= 0.15
+                
+        return self._clamp(score)
 
     def _issues_score(self, state: APState, fixture: CaseFixture) -> float:
         """
