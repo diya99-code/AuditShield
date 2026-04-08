@@ -1,0 +1,23 @@
+{
+    "task_id":  "medium_partial_delivery",
+    "case_id":  "AP-CASE-005",
+    "difficulty":  "medium",
+    "ground_truth_disposition":  "hold_invoice",
+    "required_checks":  [
+                            "invoice",
+                            "goods_receipt",
+                            "ap_policy"
+                        ],
+    "required_issues":  [
+                            "quantity_mismatch"
+                        ],
+    "has_critical_issues":  true,
+    "soft_step_threshold":  15,
+    "max_steps":  20,
+    "documents":  {
+                      "invoice":  "Invoice INV-005\nVendor: SupplyChain Corp\nAmount: $5,000.00\nItems: 50x Industrial Motors",
+                      "goods_receipt":  "GR-005\nVendor: SupplyChain Corp\nItems: 25x Industrial Motors (Short shipment detected)",
+                      "ap_policy":  "POLICY: Quantity Verification\nPayment must only be made for quantities actually received as per Goods Receipt.",
+                      "purchase_order":  "PO-005\nVendor: SupplyChain Corp\nTotal Ordered: 50x Industrial Motors"
+                  }
+}

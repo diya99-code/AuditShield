@@ -203,6 +203,9 @@ class ActionHandler:
         if "amount" in field_a.lower() and "amount" in field_b.lower():
             state.checks_completed["checked_invoice_po_match"] = True
         
+        if "qty" in field_a.lower() or "received" in field_a.lower() or "qty" in field_b.lower() or "received" in field_b.lower():
+            state.checks_completed["checked_invoice_receipt_match"] = True
+        
         # Identify issues
         if not matched:
             if "qty" in field_a.lower() or "qty" in field_b.lower():

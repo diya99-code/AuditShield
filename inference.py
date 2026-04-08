@@ -42,18 +42,22 @@ def get_deterministic_fallback(step_num, observation):
     
     # Discovery phase
     if step_num == 1: return {"action_type": "open_document", "target": "invoice"}
-    if step_num == 2: return {"action_type": "open_document", "target": "invoice_history"}
-    if step_num == 3: return {"action_type": "search_history"}
-    if step_num == 4: return {"action_type": "open_document", "target": "ap_policy"}
-    if step_num == 5: return {"action_type": "check_policy"}
-    if step_num == 6: return {"action_type": "open_document", "target": "goods_receipt"}
+    if step_num == 2: return {"action_type": "extract_field", "target": "invoice_amount"}
+    if step_num == 3: return {"action_type": "open_document", "target": "purchase_order"}
+    if step_num == 4: return {"action_type": "extract_field", "target": "po_amount"}
+    if step_num == 5: return {"action_type": "open_document", "target": "goods_receipt"}
+    if step_num == 6: return {"action_type": "extract_field", "target": "received_qty"}
+    if step_num == 7: return {"action_type": "compare_fields", "target": "invoice_amount", "params": {"field_b": "po_amount"}}
+    if step_num == 8: return {"action_type": "open_document", "target": "invoice_history"}
+    if step_num == 9 : return {"action_type": "search_history"}
+    if step_num == 10: return {"action_type": "open_document", "target": "ap_policy"}
+    if step_num == 11: return {"action_type": "check_policy"}
     
     # Reasoning phase
     is_duplicate = facts.get("duplicate_flag") == True
     is_partial = "partial" in observation.current_view.lower() if observation.current_view else False
-    has_hold_policy = "hold" in observation.current_view.lower() if (step_num == 5 and observation.current_view) else False
     
-    if is_duplicate or is_partial or task_id == "hard_duplicate_partial":
+    if is_duplicate or is_partial or task_id in ["hard_duplicate_partial", "medium_mismatch", "medium_partial_delivery"]:
         return {"action_type": "hold_invoice"}
         
     return {"action_type": "approve_invoice"}

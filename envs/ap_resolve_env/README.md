@@ -154,10 +154,10 @@ python -m pytest envs/ap_resolve_env/tests/ -v
 docker build -f envs/ap_resolve_env/server/Dockerfile -t ap-resolve-env .
 
 # Run
-docker run -p 8000:8000 ap-resolve-env
+docker run -p 7860:7860 ap-resolve-env
 
 # Health check
-curl http://localhost:8000/health
+curl http://localhost:7860/health
 ```
 
 ---
@@ -172,10 +172,10 @@ Push the `ap_resolve_env` directory to a Hugging Face Space with `runtime: fasta
 
 ```bash
 # Start the server first
-uvicorn envs.ap_resolve_env.server.app:app --host 0.0.0.0 --port 8000
+uvicorn envs.ap_resolve_env.server.app:app --host 0.0.0.0 --port 7860
 
 # Run baseline
-API_BASE_URL=http://localhost:8000 python -m envs.ap_resolve_env.inference
+API_BASE_URL=http://localhost:7860 python -m envs.ap_resolve_env.inference
 ```
 
 Optional env vars:

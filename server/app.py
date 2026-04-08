@@ -12,6 +12,8 @@ from __future__ import annotations
 
 import os
 
+print("🚀🚀 SERVER BOOTING FROM ROOT 🚀🚀")
+
 from openenv.core.env_server.http_server import create_app
 
 from envs.ap_resolve_env.models import APAction, APObservation

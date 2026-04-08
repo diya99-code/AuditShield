@@ -17,7 +17,9 @@ _TASKS_DIR = Path(__file__).parent / "tasks"
 
 TASK_IDS: List[str] = [
     "easy_straight_through",
+    "easy_valid_discount",
     "medium_mismatch",
+    "medium_partial_delivery",
     "hard_duplicate_partial",
 ]
 

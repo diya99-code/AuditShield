@@ -5,3 +5,9 @@ environments:
     model: envs.ap_resolve_env.env.APEnvironment
     action: envs.ap_resolve_env.models.APAction
     observation: envs.ap_resolve_env.models.APObservation
+    tasks:
+      - easy_straight_through
+      - easy_valid_discount
+      - medium_mismatch
+      - medium_partial_delivery
+      - hard_duplicate_partial

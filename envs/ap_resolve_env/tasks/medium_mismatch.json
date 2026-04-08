@@ -1,43 +1,43 @@
 {
-  "task_id": "medium_mismatch",
-  "case_id": "CASE-002",
-  "difficulty": "medium",
-  "documents": {
-    "invoice": "INVOICE\nInvoice Number: INV-2024-0087\nVendor: TechParts Inc (VENDOR-042)\nDate: 2024-03-20\nDue Date: 2024-04-19\n\nLine Items:\n  1. Server RAM 32GB x5 @ $220.00 = $1,100.00\n  2. SSD 1TB x8 @ $180.00 = $1,440.00\n  3. Network Cables x50 @ $12.00 = $600.00\n\nSubtotal: $3,140.00\nTax (8%): $251.20\nTotal Due: $3,391.20\n\nPayment Terms: Net 30\nBank: Commerce Bank\nAccount: 9876-5432\nRouting: 021000089",
-    "purchase_order": "PURCHASE ORDER\nPO Number: PO-2024-0134\nVendor: TechParts Inc (VENDOR-042)\nDate: 2024-03-05\nRequested By: IT Department\n\nLine Items:\n  1. Server RAM 32GB x5 @ $220.00 = $1,100.00\n  2. SSD 1TB x6 @ $180.00 = $1,080.00\n  3. Network Cables x50 @ $12.00 = $600.00\n\nSubtotal: $2,780.00\nTax (8%): $222.40\nTotal Authorized: $3,002.40\n\nApproved By: IT Manager\nApproval Date: 2024-03-06",
-    "goods_receipt": "GOODS RECEIPT NOTE\nGRN Number: GRN-2024-0078\nPO Reference: PO-2024-0134\nVendor: TechParts Inc (VENDOR-042)\nReceipt Date: 2024-03-19\n\nItems Received:\n  1. Server RAM 32GB: 5 units received (5 ordered) - COMPLETE\n  2. SSD 1TB: 6 units received (6 ordered) - COMPLETE\n  3. Network Cables: 50 units received (50 ordered) - COMPLETE\n\nCondition: All items in good condition\nReceived By: IT Receiving\nSignature: R. Tech",
-    "vendor_master": "VENDOR MASTER RECORD\nVendor ID: VENDOR-042\nVendor Name: TechParts Inc\nStatus: ACTIVE\nPayment Terms: Net 30\nTax ID: 98-7654321\nAddress: 500 Tech Blvd, Austin, TX 78701\nContact: billing@techparts.com\nCredit Limit: $100,000\nCurrent Balance: $5,200.00\nRisk Rating: MEDIUM\nLast Audit: 2024-01-15",
-    "ap_policy": "ACCOUNTS PAYABLE POLICY\n\nSection 1: Invoice Approval\n1.1 Invoices matching PO amount within 2% tolerance shall be approved.\n1.2 Invoices with quantity discrepancies > 5% require hold and vendor contact.\n1.3 Invoices from inactive vendors must be escalated.\n1.4 Duplicate invoices (same vendor, amount, date within 30 days) must be rejected.\n\nSection 2: Three-Way Match\n2.1 All invoices must be matched against PO and GRN before approval.\n2.2 Partial receipts require hold until full delivery confirmed.\n\nSection 3: Early Payment\n3.1 Invoices with early-payment discount terms may be approved early if discount > 1%.",
-    "invoice_history": "INVOICE HISTORY - Vendor: VENDOR-042 (TechParts Inc)\n\nLast 12 months:\n  INV-2023-0445: $2,100.00 - APPROVED - 2023-08-14\n  INV-2023-0612: $4,800.00 - APPROVED - 2023-12-03\n  INV-2024-0031: $1,500.00 - APPROVED - 2024-02-01\n\nNo duplicate invoices detected.\nVendor payment history: GOOD (1 late payment in 12 months)"
-  },
-  "critical_fields": [
-    "invoice_amount",
-    "po_amount",
-    "received_qty",
-    "billed_qty",
-    "vendor_id",
-    "ssd_qty_invoiced",
-    "ssd_qty_ordered"
-  ],
-  "required_checks": [
-    "opened_invoice",
-    "opened_purchase_order",
-    "opened_goods_receipt",
-    "checked_invoice_po_match",
-    "checked_invoice_receipt_match"
-  ],
-  "required_issues": [
-    "quantity_mismatch"
-  ],
-  "ground_truth_disposition": "hold_invoice",
-  "required_evidence_fields": [
-    "invoice_amount",
-    "po_amount",
-    "ssd_qty_invoiced",
-    "ssd_qty_ordered"
-  ],
-  "has_critical_issues": true,
-  "soft_step_threshold": 8,
-  "max_steps": 18,
-  "vendor_response": "We apologize for the discrepancy. Our records show we shipped 8 SSDs but your PO only authorized 6. We will issue a corrected invoice for 6 SSDs at $1,080.00. Please hold payment until you receive the corrected invoice INV-2024-0087C."
+    "task_id":  "medium_mismatch",
+    "case_id":  "CASE-002",
+    "difficulty":  "medium",
+    "documents":  {
+                      "invoice":  "INVOICE\nInvoice Number: INV-2024-0087\nVendor: TechParts Inc (VENDOR-042)\nDate: 2024-03-20\nDue Date: 2024-04-19\n\nLine Items:\n  1. Server RAM 32GB x5 @ $220.00 = $1,100.00\n  2. SSD 1TB x8 @ $180.00 = $1,440.00\n  3. Network Cables x50 @ $12.00 = $600.00\n\nSubtotal: $3,140.00\nTax (8%): $251.20\nTotal Due: $3,391.20\n\nPayment Terms: Net 30\nBank: Commerce Bank\nAccount: 9876-5432\nRouting: 021000089",
+                      "purchase_order":  "PURCHASE ORDER\nPO Number: PO-2024-0134\nVendor: TechParts Inc (VENDOR-042)\nDate: 2024-03-05\nRequested By: IT Department\n\nLine Items:\n  1. Server RAM 32GB x5 @ $220.00 = $1,100.00\n  2. SSD 1TB x6 @ $180.00 = $1,080.00\n  3. Network Cables x50 @ $12.00 = $600.00\n\nSubtotal: $2,780.00\nTax (8%): $222.40\nTotal Authorized: $3,002.40\n\nApproved By: IT Manager\nApproval Date: 2024-03-06",
+                      "goods_receipt":  "GOODS RECEIPT NOTE\nGRN Number: GRN-2024-0078\nPO Reference: PO-2024-0134\nVendor: TechParts Inc (VENDOR-042)\nReceipt Date: 2024-03-19\n\nItems Received:\n  1. Server RAM 32GB: 5 units received (5 ordered) - COMPLETE\n  2. SSD 1TB: 6 units received (6 ordered) - COMPLETE\n  3. Network Cables: 50 units received (50 ordered) - COMPLETE\n\nCondition: All items in good condition\nReceived By: IT Receiving\nSignature: R. Tech",
+                      "vendor_master":  "VENDOR MASTER RECORD\nVendor ID: VENDOR-042\nVendor Name: TechParts Inc\nStatus: ACTIVE\nPayment Terms: Net 30\nTax ID: 98-7654321\nAddress: 500 Tech Blvd, Austin, TX 78701\nContact: billing@techparts.com\nCredit Limit: $100,000\nCurrent Balance: $5,200.00\nRisk Rating: MEDIUM\nLast Audit: 2024-01-15",
+                      "ap_policy":  "ACCOUNTS PAYABLE POLICY\n\nSection 1: Invoice Approval\n1.1 Invoices matching PO amount within 2% tolerance shall be approved.\n1.2 Invoices with quantity discrepancies \u003e 5% require hold and vendor contact.\n1.3 Invoices from inactive vendors must be escalated.\n1.4 Duplicate invoices (same vendor, amount, date within 30 days) must be rejected.\n\nSection 2: Three-Way Match\n2.1 All invoices must be matched against PO and GRN before approval.\n2.2 Partial receipts require hold until full delivery confirmed.\n\nSection 3: Early Payment\n3.1 Invoices with early-payment discount terms may be approved early if discount \u003e 1%.",
+                      "invoice_history":  "INVOICE HISTORY - Vendor: VENDOR-042 (TechParts Inc)\n\nLast 12 months:\n  INV-2023-0445: $2,100.00 - APPROVED - 2023-08-14\n  INV-2023-0612: $4,800.00 - APPROVED - 2023-12-03\n  INV-2024-0031: $1,500.00 - APPROVED - 2024-02-01\n\nNo duplicate invoices detected.\nVendor payment history: GOOD (1 late payment in 12 months)"
+                  },
+    "critical_fields":  [
+                            "invoice_amount",
+                            "po_amount",
+                            "received_qty",
+                            "billed_qty",
+                            "vendor_id",
+                            "ssd_qty_invoiced",
+                            "ssd_qty_ordered"
+                        ],
+    "required_checks":  [
+                            "opened_invoice",
+                            "opened_purchase_order",
+                            "opened_goods_receipt",
+                            "checked_invoice_po_match",
+                            "checked_invoice_receipt_match"
+                        ],
+    "required_issues":  [
+                            "quantity_mismatch"
+                        ],
+    "ground_truth_disposition":  "hold_invoice",
+    "required_evidence_fields":  [
+                                     "invoice_amount",
+                                     "po_amount",
+                                     "ssd_qty_invoiced",
+                                     "ssd_qty_ordered"
+                                 ],
+    "has_critical_issues":  true,
+    "soft_step_threshold":  15,
+    "max_steps":  20,
+    "vendor_response":  "We apologize for the discrepancy. Our records show we shipped 8 SSDs but your PO only authorized 6. We will issue a corrected invoice for 6 SSDs at $1,080.00. Please hold payment until you receive the corrected invoice INV-2024-0087C."
 }

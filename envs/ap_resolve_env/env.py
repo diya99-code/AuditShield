@@ -43,6 +43,10 @@ class APEnvironment(Environment):
     # OpenEnv API
     # ------------------------------------------------------------------
 
+    def list_tasks(self) -> List[str]:
+        """Return the list of all registered task IDs."""
+        return self._task_registry.list_ids()
+
     def reset(
         self,
         task_id: Optional[Literal["easy_straight_through", "medium_mismatch", "hard_duplicate_partial"]] = None,
@@ -100,6 +104,7 @@ class APEnvironment(Environment):
 
         # Increment step count
         self._state.step_count += 1
+        print(f"!!! AUDIT STEP {self._state.step_count} EXECUTING !!!")
 
         # Execute action
         result = self._action_handler.handle(

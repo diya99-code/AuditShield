@@ -1,0 +1,22 @@
+{
+    "task_id":  "easy_valid_discount",
+    "case_id":  "AP-CASE-004",
+    "difficulty":  "easy",
+    "ground_truth_disposition":  "approve_invoice",
+    "required_checks":  [
+                            "invoice",
+                            "ap_policy"
+                        ],
+    "required_issues":  [
+
+                        ],
+    "has_critical_issues":  false,
+    "soft_step_threshold":  15,
+    "max_steps":  20,
+    "documents":  {
+                      "invoice":  "Invoice INV-004\nVendor: FastCompute\nAmount: $1,000.00\nTerms: 2% 10, Net 30\nDate: 2026-04-01",
+                      "ap_policy":  "POLICY: Early Payment Discounts\nWe always take safe discounts of 1% or higher.\n\u00272% 10\u0027 means 2% discount if paid within 10 days.",
+                      "goods_receipt":  "GR-004\nVendor: FastCompute\nItems: 10x Server Racks\nStatus: Received in full.",
+                      "purchase_order":  "PO-004\nVendor: FastCompute\nAmount: $1,000.00"
+                  }
+}
