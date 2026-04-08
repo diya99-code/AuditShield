@@ -1,0 +1,20 @@
+{
+  "task_id": "hard_duplicate_partial",
+  "case_id": "CASE-003",
+  "documents": {
+    "invoice": "INVOICE\nInvoice Number: INV-2024-0103\nVendor: GlobalLogistics Co (VENDOR-017)\nDate: 2024-03-25\nDue Date: 2024-04-04\n\nEARLY PAYMENT DISCOUNT: 2% if paid by 2024-04-04 (10 days)\n\nLine Items:\n  1. Freight Services - March Batch A x1 @ $8,500.00 = $8,500.00\n  2. Handling Fees x1 @ $350.00 = $350.00\n\nSubtotal: $8,850.00\nTax (0% - Services): $0.00\nTotal Due: $8,850.00\nEarly Payment Amount: $8,673.00 (saves $177.00)\n\nPayment Terms: 2/10 Net 30\nBank: Global Bank\nAccount: 5555-1234\nRouting: 021000055",
+    "purchase_order": "PURCHASE ORDER\nPO Number: PO-2024-0178\nVendor: GlobalLogistics Co (VENDOR-017)\nDate: 2024-03-10\nRequested By: Operations\n\nLine Items:\n  1. Freight Services - March Batch A x1 @ $8,500.00 = $8,500.00\n  2. Handling Fees x1 @ $350.00 = $350.00\n\nSubtotal: $8,850.00\nTax: $0.00\nTotal Authorized: $8,850.00\n\nApproved By: Ops Director\nApproval Date: 2024-03-11\nNote: Partial delivery expected - confirm full service completion before payment.",
+    "goods_receipt": "GOODS RECEIPT NOTE\nGRN Number: GRN-2024-0091\nPO Reference: PO-2024-0178\nVendor: GlobalLogistics Co (VENDOR-017)\nService Completion Date: 2024-03-24\n\nServices Confirmed:\n  1. Freight Services - March Batch A: PARTIAL - 60% complete as of 2024-03-24\n     Remaining: Final mile delivery pending (est. completion 2024-04-05)\n  2. Handling Fees: COMPLETE\n\nNote: Full service not yet confirmed. Awaiting final delivery confirmation.\nReceived By: Operations Team\nSignature: O. Manager",
+    "vendor_master": "VENDOR MASTER RECORD\nVendor ID: VENDOR-017\nVendor Name: GlobalLogistics Co\nStatus: ACTIVE\nPayment Terms: 2/10 Net 30\nTax ID: 55-1234567\nAddress: 200 Logistics Way, Chicago, IL 60601\nContact: ap@globallogistics.com\nCredit Limit: $200,000\nCurrent Balance: $8,850.00\nRisk Rating: LOW\nLast Audit: 2024-02-20",
+    "ap_policy": "ACCOUNTS PAYABLE POLICY\n\nSection 1: Invoice Approval\n1.1 Invoices matching PO amount within 2% tolerance shall be approved.\n1.2 Invoices with quantity discrepancies > 5% require hold and vendor contact.\n1.3 Invoices from inactive vendors must be escalated.\n1.4 Duplicate invoices (same vendor, amount, date within 30 days) must be rejected.\n\nSection 2: Three-Way Match\n2.1 All invoices must be matched against PO and GRN before approval.\n2.2 Partial receipts require hold until full delivery confirmed.\n\nSection 3: Early Payment\n3.1 Invoices with early-payment discount terms may be approved early if discount > 1%.\n3.2 Early payment approval requires full service/goods delivery confirmation.\n3.3 Partial delivery invoices must be held regardless of early payment terms.",
+    "invoice_history": "INVOICE HISTORY - Vendor: VENDOR-017 (GlobalLogistics Co)\n\nLast 12 months:\n  INV-2023-0789: $7,200.00 - APPROVED - 2023-07-15\n  INV-2023-0901: $9,100.00 - APPROVED - 2023-10-08\n  INV-2024-0067: $8,850.00 - APPROVED - 2024-02-28\n  INV-2024-0098: $8,850.00 - PENDING - 2024-03-20\n\n*** ALERT: Potential duplicate detected ***\nINV-2024-0098 (2024-03-20, $8,850.00) and INV-2024-0103 (2024-03-25, $8,850.00)\nSame vendor, same amount, within 30 days. Requires investigation.\n\nVendor payment history: EXCELLENT (0 late payments)"
+  },
+  "critical_fields": ["invoice_amount", "po_amount", "service_completion_pct", "duplicate_flag", "early_payment_discount", "vendor_id"],
+  "required_checks": ["invoice", "purchase_order", "goods_receipt", "invoice_history"],
+  "ground_truth_disposition": "hold_invoice",
+  "required_evidence_fields": ["service_completion_pct", "duplicate_flag", "invoice_amount"],
+  "has_critical_issues": true,
+  "soft_step_threshold": 12,
+  "max_steps": 20,
+  "vendor_response": "INV-2024-0098 was issued in error and has been voided. INV-2024-0103 is the correct invoice. Regarding partial delivery: final mile delivery will complete by 2024-04-05. We understand you may need to hold payment until full completion per your policy."
+}

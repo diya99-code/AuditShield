@@ -1,0 +1,7 @@
+spec_version: 1
+name: ap_resolve_env
+type: space
+runtime: docker
+app: server.app:app
+port: 8000
+enable_web_interface: true

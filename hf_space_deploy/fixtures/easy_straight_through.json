@@ -1,0 +1,20 @@
+{
+  "task_id": "easy_straight_through",
+  "case_id": "CASE-001",
+  "documents": {
+    "invoice": "INVOICE\nInvoice Number: INV-2024-0042\nVendor: Acme Supplies Ltd (VENDOR-001)\nDate: 2024-03-15\nDue Date: 2024-04-14\n\nLine Items:\n  1. Office Chairs x10 @ $150.00 = $1,500.00\n  2. Desk Lamps x20 @ $45.00 = $900.00\n\nSubtotal: $2,400.00\nTax (8%): $192.00\nTotal Due: $2,592.00\n\nPayment Terms: Net 30\nBank: First National Bank\nAccount: 1234-5678\nRouting: 021000021",
+    "purchase_order": "PURCHASE ORDER\nPO Number: PO-2024-0099\nVendor: Acme Supplies Ltd (VENDOR-001)\nDate: 2024-03-01\nRequested By: Jane Smith\n\nLine Items:\n  1. Office Chairs x10 @ $150.00 = $1,500.00\n  2. Desk Lamps x20 @ $45.00 = $900.00\n\nSubtotal: $2,400.00\nTax (8%): $192.00\nTotal Authorized: $2,592.00\n\nApproved By: John Manager\nApproval Date: 2024-03-02",
+    "goods_receipt": "GOODS RECEIPT NOTE\nGRN Number: GRN-2024-0055\nPO Reference: PO-2024-0099\nVendor: Acme Supplies Ltd (VENDOR-001)\nReceipt Date: 2024-03-14\n\nItems Received:\n  1. Office Chairs: 10 units received (10 ordered) - COMPLETE\n  2. Desk Lamps: 20 units received (20 ordered) - COMPLETE\n\nCondition: All items in good condition\nReceived By: Warehouse Team\nSignature: W. Jones",
+    "vendor_master": "VENDOR MASTER RECORD\nVendor ID: VENDOR-001\nVendor Name: Acme Supplies Ltd\nStatus: ACTIVE\nPayment Terms: Net 30\nTax ID: 12-3456789\nAddress: 100 Commerce St, Springfield, IL 62701\nContact: sales@acmesupplies.com\nCredit Limit: $50,000\nCurrent Balance: $0.00\nRisk Rating: LOW\nLast Audit: 2023-12-01",
+    "ap_policy": "ACCOUNTS PAYABLE POLICY\n\nSection 1: Invoice Approval\n1.1 Invoices matching PO amount within 2% tolerance shall be approved.\n1.2 Invoices with quantity discrepancies > 5% require hold and vendor contact.\n1.3 Invoices from inactive vendors must be escalated.\n1.4 Duplicate invoices (same vendor, amount, date within 30 days) must be rejected.\n\nSection 2: Three-Way Match\n2.1 All invoices must be matched against PO and GRN before approval.\n2.2 Partial receipts require hold until full delivery confirmed.\n\nSection 3: Early Payment\n3.1 Invoices with early-payment discount terms may be approved early if discount > 1%.",
+    "invoice_history": "INVOICE HISTORY - Vendor: VENDOR-001 (Acme Supplies Ltd)\n\nLast 12 months:\n  INV-2023-0198: $1,200.00 - APPROVED - 2023-09-10\n  INV-2023-0312: $3,400.00 - APPROVED - 2023-11-22\n  INV-2024-0011: $800.00 - APPROVED - 2024-01-15\n\nNo duplicate invoices detected.\nVendor payment history: EXCELLENT (0 late payments)"
+  },
+  "critical_fields": ["invoice_amount", "po_amount", "received_qty", "billed_qty", "vendor_id"],
+  "required_checks": ["invoice", "purchase_order", "goods_receipt"],
+  "ground_truth_disposition": "approve_invoice",
+  "required_evidence_fields": ["invoice_amount", "po_amount", "vendor_id"],
+  "has_critical_issues": false,
+  "soft_step_threshold": 8,
+  "max_steps": 15,
+  "vendor_response": "Thank you for your inquiry. Invoice INV-2024-0042 is correct. All items were delivered as per PO-2024-0099. Please process payment at your earliest convenience."
+}
