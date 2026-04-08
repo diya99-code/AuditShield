@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "auditshield"
+version = "1.0.0"
+description = "AI-powered AuditShield Environment for Autnomous Auditing"
+dependencies = [
+    "openenv-core>=0.2.0",
+    "fastapi>=0.104.0",
+    "pydantic>=2.0.0",
+    "uvicorn>=0.24.0",
+    "websockets>=15.0.0",
+    "httpx>=0.28.0",
+    "gradio>=4.0.0",
+    "openai>=1.0.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.scripts]
+server = "server.app:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["envs*", "server*"]

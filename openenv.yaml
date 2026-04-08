@@ -1,0 +1,7 @@
+# OpenEnv Configuration for AuditShield
+environments:
+  ap_resolve_env:
+    path: envs/ap_resolve_env
+    model: envs.ap_resolve_env.env.APEnvironment
+    action: envs.ap_resolve_env.models.APAction
+    observation: envs.ap_resolve_env.models.APObservation
