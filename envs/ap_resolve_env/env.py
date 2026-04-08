@@ -81,7 +81,7 @@ class APEnvironment(Environment):
             message=f"Episode started. Case: {fixture.case_id}. Task: {fixture.task_id}. "
                     f"Available documents: {fixture.documents.keys()}",
             done=False,
-            reward=0.0,
+            reward=0.01,
         )
 
     def step(
@@ -96,7 +96,7 @@ class APEnvironment(Environment):
             return self._build_observation(
                 message="Episode is already done. Call reset() to start a new episode.",
                 done=True,
-                reward=0.0,
+                reward=0.01,
             )
 
         assert self._fixture is not None, "Call reset() before step()"
@@ -136,7 +136,7 @@ class APEnvironment(Environment):
             return self._build_observation(
                 message="Step budget exhausted. Episode terminated.",
                 done=True,
-                reward=0.0,
+                reward=0.01,
                 current_view=self._workspace.get_current_content(),
             )
 
