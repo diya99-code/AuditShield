@@ -2,31 +2,38 @@ env_id: auditshield
 version: "1.0.0"
 description: "AP audit and invoice resolution environment"
 
-entrypoint:
-  module: envs.ap_resolve_env.env
-  class: APEnvironment
-
 tasks:
   - id: easy_straight_through
     difficulty: easy
     max_steps: 10
+    grader:
+      type: llm
+      prompt_template: "Score the AP invoice straight-through processing 0.0 to 1.0..."
 
   - id: easy_valid_discount
     difficulty: easy
     max_steps: 10
+    grader:
+      type: llm
+      prompt_template: "Score the AP invoice valid discount handling 0.0 to 1.0..."
 
   - id: medium_mismatch
     difficulty: medium
     max_steps: 15
+    grader:
+      type: llm
+      prompt_template: "Score the AP invoice mismatch resolution 0.0 to 1.0..."
 
   - id: medium_partial_delivery
     difficulty: medium
     max_steps: 15
+    grader:
+      type: llm
+      prompt_template: "Score the AP invoice partial delivery resolution 0.0 to 1.0..."
 
   - id: hard_duplicate_partial
     difficulty: hard
     max_steps: 20
-
-grader:
-  module: envs.ap_resolve_env.grader
-  class: Grader
+    grader:
+      type: llm
+      prompt_template: "Score the duplicate and partial delivery audit 0.0 to 1.0..."
