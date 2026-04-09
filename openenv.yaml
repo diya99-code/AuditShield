@@ -1,13 +1,32 @@
-# OpenEnv Configuration for AuditShield
-environments:
-  ap_resolve_env:
-    path: envs/ap_resolve_env
-    model: envs.ap_resolve_env.env.APEnvironment
-    action: envs.ap_resolve_env.models.APAction
-    observation: envs.ap_resolve_env.models.APObservation
-    tasks:
-      - easy_straight_through
-      - easy_valid_discount
-      - medium_mismatch
-      - medium_partial_delivery
-      - hard_duplicate_partial
+env_id: auditshield
+version: "1.0.0"
+description: "AP audit and invoice resolution environment"
+
+entrypoint:
+  module: envs.ap_resolve_env.env
+  class: APEnvironment
+
+tasks:
+  - id: easy_straight_through
+    difficulty: easy
+    max_steps: 10
+
+  - id: easy_valid_discount
+    difficulty: easy
+    max_steps: 10
+
+  - id: medium_mismatch
+    difficulty: medium
+    max_steps: 15
+
+  - id: medium_partial_delivery
+    difficulty: medium
+    max_steps: 15
+
+  - id: hard_duplicate_partial
+    difficulty: hard
+    max_steps: 20
+
+grader:
+  module: envs.ap_resolve_env.grader
+  class: Grader
