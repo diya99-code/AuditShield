@@ -32,7 +32,7 @@ if _web_enabled:
                 gr.Markdown(f"### 🎯 Task Selector\nSelect a difficulty level and click **Launch** to reset the environment with that task.")
                 with gr.Row():
                     task_dropdown = gr.Dropdown(
-                        choices=["easy_straight_through", "easy_valid_discount", "medium_mismatch", "medium_partial_delivery", "hard_duplicate_partial"],
+                        choices=["easy_straight_through", "medium_mismatch", "hard_duplicate_partial"],
                         value="easy_straight_through",
                         label="Select Difficulty"
                     )
