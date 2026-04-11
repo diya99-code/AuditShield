@@ -128,11 +128,8 @@ async def run_episode(task_id: str):
 
 # ===== Entry Point =====
 if __name__ == "__main__":
-    async def main():
-        for task_id in TASKS:
-            try:
-                await run_episode(task_id)
-            except Exception as e:
-                print(f"[END] success=false steps=0 score=0.5000 rewards=0.5000", flush=True)
-
-    asyncio.run(main())
+    for task_id in TASKS:
+        try:
+            asyncio.run(run_episode(task_id))
+        except Exception as e:
+            print(f"[END] success=false steps=0 score=0.50 rewards=0.50", flush=True)
